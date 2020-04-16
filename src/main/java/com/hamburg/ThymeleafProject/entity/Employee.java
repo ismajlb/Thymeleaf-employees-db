@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Table(name="employee")
 public class Employee {
 	
-	// define fields
+	// fields properties
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -27,7 +27,7 @@ public class Employee {
 	@Column(name="email")
 	private String email;
 	
-	@Column(name="phoneNumber")
+	@Column(name="phone_number")
 	private String phoneNumber;
 		
 			

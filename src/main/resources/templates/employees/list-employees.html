@@ -1,8 +1,15 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
 	<title>Employee Directory</title>
+	
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Bootstrap CSS -->
 	<link rel="stylesheet" 
 			href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
 			integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
@@ -16,10 +23,24 @@
 
 	<h3>Employee Directory</h3>
 	<hr>
-	<a th:href="@{/employees/showFormForAdd}" 
-		class="btn btn-primary btn-sm mb-3">
-		Add Employee
-	</a>
+	
+	<div>
+		User: <span sec:authentication="name"></span>
+		<br>
+		Role(s): <span sec:authentication="principal.authorities"></span>
+		<br><br>
+	</div>
+	
+    <form th:action="@{/employees/search}" class="form-inline">
+		<a th:href="@{/employees/showFormForAdd}"
+			class="btn btn-primary btn-sm mr-5 mb-3">
+			Add Employee
+		</a>
+
+		<input class="form-control  ml-5 mr-sm-2 mb-3" type="search" name="employeeName" placeholder="Search by name" />
+
+		<button class="btn btn-success mb-3" type="submit">Search</button>
+    </form>	
 	
 	<table border="1" class="table table-bordered table-striped">
 		<thead class="thead-dark">
@@ -27,7 +48,7 @@
 				<th>First Name</th>
 				<th>Last Name</th>
 				<th>Email</th>
-				<th>Phone Number</th>
+				<th>Phone Number</th>			
 				<th>Action</th>
 			</tr>
 		</thead>
@@ -39,6 +60,7 @@
 				<td th:text="${tempEmployee.lastName}" />
 				<td th:text="${tempEmployee.email}" />
 				<td th:text="${tempEmployee.phoneNumber}" />
+				
 				
 				<!-- This is button for update in the table -->
 				<td>
@@ -56,6 +78,14 @@
 			</tr>
 		</tbody>		
 	</table>
+	
+	<!-- Add a logout button -->
+	<form action="#" th:action="@{/logout}" 
+			   method="POST">
+	
+		<input type="submit" value="Logout" class="btn btn-outline-primary mt-2" />
+	
+	</form>
 	
 	</div>
 	
